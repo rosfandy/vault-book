@@ -65,16 +65,8 @@ var GitbookPlugin = class extends import_obsidian.Plugin {
   }
   async onload() {
     await this.loadSettings();
-    const adapter = this.app.vault.adapter;
-    let vaultBase = "";
-    if (adapter.basePath) {
-      vaultBase = adapter.basePath;
-    } else if (typeof adapter.getBasePath === "function") {
-      vaultBase = adapter.getBasePath();
-    } else {
-      vaultBase = path.join(process.env.HOME || "/home/rosfandy", "myfiles/vault");
-    }
-    this.pluginDir = path.join(vaultBase, ".obsidian/plugins/obsidian-book");
+    const configDir = this.app.vault.configDir;
+    this.pluginDir = path.join(configDir, "plugins", "obs-book");
     this.addCommand({
       id: "start-server",
       name: "Start Gitbook Server",
@@ -183,7 +175,7 @@ app.js: (${exists(path.join(distDir, "app.js"))})
           return;
         res.writeHead(404);
         res.end("Not found");
-      } catch (err) {
+      } catch (e) {
         res.writeHead(500);
         res.end("Server error");
       }

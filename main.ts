@@ -35,18 +35,8 @@ export default class GitbookPlugin extends Plugin {
 
   async onload() {
     await this.loadSettings();
-    // Get vault base path via adapter
-    const adapter = this.app.vault.adapter as FileSystemAdapter;
-    let vaultBase = "";
-    if ((adapter as any).basePath) {
-      vaultBase = (adapter as any).basePath;
-    } else if (typeof (adapter as any).getBasePath === "function") {
-      vaultBase = (adapter as any).getBasePath();
-    } else {
-      // Last resort: use vault name as subdir of home
-      vaultBase = path.join(process.env.HOME || "/home/rosfandy", "myfiles/vault");
-    }
-    this.pluginDir = path.join(vaultBase, ".obsidian/plugins/obsidian-book");
+    const configDir = this.app.vault.configDir;
+    this.pluginDir = path.join(configDir, "plugins", "obs-book");
 
     this.addCommand({
       id: "start-server",
@@ -166,7 +156,7 @@ export default class GitbookPlugin extends Plugin {
         // 404
         res.writeHead(404);
         res.end("Not found");
-      } catch (err) {
+      } catch {
         res.writeHead(500);
         res.end("Server error");
       }
