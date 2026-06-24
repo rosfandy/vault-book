@@ -23,7 +23,7 @@ Edit notes in Obsidian, see them live in the browser. No export, no build step â
 
 ### Manual (BRAT)
 
-Add `rosfandy/obs-book-plugin` via the BRAT plugin.
+Add `rosfandy/vault-book-plugin` via the BRAT plugin.
 
 ## Usage
 
@@ -35,8 +35,8 @@ Add `rosfandy/obs-book-plugin` via the BRAT plugin.
 ## Development
 
 ```bash
-git clone https://github.com/rosfandy/obs-book-plugin.git
-cd obs-book-plugin
+git clone https://github.com/rosfandy/vault-book-plugin.git
+cd vault-book-plugin
 bun install
 bun run build-all
 ```
