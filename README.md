@@ -1,4 +1,4 @@
-# Obsidian Book
+# Vault Book
 
 Turn your Obsidian vault into a Gitbook-like website.
 
@@ -18,7 +18,7 @@ Edit notes in Obsidian, see them live in the browser. No export, no build step �
 ### From Obsidian Community Plugins
 
 1. Open Obsidian Settings → Community Plugins
-2. Search for "Obsidian Book"
+2. Search for "Vault Book"
 3. Install and enable
 
 ### Manual (BRAT)
@@ -28,7 +28,7 @@ Add `rosfandy/obs-book-plugin` via the BRAT plugin.
 ## Usage
 
 1. Enable the plugin in settings
-2. Run **"Start Obsidian Book Server"** from the command palette
+2. Run **"Start Vault Book Server"** from the command palette
 3. Open `http://localhost:3000` in your browser
 4. Edit any note in Obsidian → refresh browser to see changes
 

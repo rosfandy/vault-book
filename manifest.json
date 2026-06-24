@@ -1,6 +1,6 @@
 {
   "id": "obs-book",
-  "name": "Obsidian Book",
+  "name": "Vault Book",
   "version": "1.0.0",
   "minAppVersion": "0.15.0",
   "description": "Turn your vault into a Gitbook-like website",
