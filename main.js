@@ -66,7 +66,7 @@ var GitbookPlugin = class extends import_obsidian.Plugin {
   async onload() {
     await this.loadSettings();
     const configDir = this.app.vault.configDir;
-    this.pluginDir = path.join(configDir, "plugins", "obs-book");
+    this.pluginDir = path.join(configDir, "plugins", "book-vault");
     this.addCommand({
       id: "start-server",
       name: "Start Gitbook Server",
@@ -140,6 +140,11 @@ app.js: (${exists(path.join(distDir, "app.js"))})
         return;
       }
       try {
+        if (pname === "/api/settings") {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ siteTitle: this.settings.siteTitle }));
+          return;
+        }
         if (pname === "/api/pages") {
           res.writeHead(200, { "Content-Type": "application/json" });
           res.end(JSON.stringify(getPages()));

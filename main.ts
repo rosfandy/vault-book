@@ -114,6 +114,13 @@ export default class GitbookPlugin extends Plugin {
       }
 
       try {
+        // API: settings
+        if (pname === "/api/settings") {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ siteTitle: this.settings.siteTitle }));
+          return;
+        }
+
         // API: list pages
         if (pname === "/api/pages") {
           res.writeHead(200, { "Content-Type": "application/json" });

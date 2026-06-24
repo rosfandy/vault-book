@@ -15,6 +15,13 @@ export default function App() {
   const [currentSlug, setCurrentSlug] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const { page, loading: pageLoading } = usePage(currentSlug);
+  const [siteTitle, setSiteTitle] = useState("Vault Book");
+
+  useEffect(() => {
+    fetch(`/api/settings`)
+      .then((r) => r.json())
+      .then((d) => setSiteTitle(d.siteTitle || "Vault Book"));
+  }, []);
 
   // Read slug from URL on mount
   useEffect(() => {
@@ -51,7 +58,6 @@ export default function App() {
   }, []);
 
   const headings = page ? extractHeadings(page.content) : [];
-  const siteTitle = "My Gitbook";
 
   return (
     <div className="flex min-h-screen bg-bg text-text-primary">
