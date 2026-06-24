@@ -4,6 +4,12 @@ Turn your Obsidian vault into a Gitbook-like website.
 
 Edit notes in Obsidian, see them live in the browser. No export, no build step — just save and refresh.
 
+## Preview
+
+| Light | Dark | Search |
+|-------|------|--------|
+| ![Light](https://ik.imagekit.io/mesifer/vault-book/page.png) | ![Dark](https://ik.imagekit.io/mesifer/vault-book/dark.png) | ![Search](https://ik.imagekit.io/mesifer/vault-book/search-feat.png?updatedAt=1782317806170) |
+
 ## Features
 
 - **Live web server** — starts from within Obsidian
