@@ -104,6 +104,7 @@ export default class GitbookPlugin extends Plugin {
       }
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises -- createServer expects void return; async handler is intentional and safe
     this.server = http.createServer(async (req, res) => {
       const url = new URL(req.url ?? "/", `http://localhost:${this.settings.port}`);
       const pname = url.pathname;
