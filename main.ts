@@ -99,7 +99,6 @@ export default class GitbookPlugin extends Plugin {
       return true;
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.server = http.createServer(async (req, res) => {
       const url = new URL(req.url ?? "/", `http://localhost:${this.settings.port}`);
       const pname = url.pathname;
