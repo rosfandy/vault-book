@@ -102,6 +102,19 @@ export default class GitbookPlugin extends Plugin {
       }
     };
 
+    const serveEmbedded = (urlPath: string, res: http.ServerResponse): boolean => {
+      const p = urlPath === "/" ? "/index.html" : urlPath;
+      // @ts-ignore
+      const content = globalThis.__EMBEDDED_WEB?.[p];
+      if (content) {
+        const ext = path.extname(p).toLowerCase();
+        res.writeHead(200, { "Content-Type": MIME[ext] || "text/plain" });
+        res.end(content);
+        return true;
+      }
+      return false;
+    };
+
     // eslint-disable-next-line @typescript-eslint/no-misused-promises -- createServer expects void return; async handler is intentional and safe
     this.server = http.createServer(async (req, res) => {
       const url = new URL(req.url ?? "/", `http://localhost:${this.settings.port}`);
@@ -155,14 +168,16 @@ export default class GitbookPlugin extends Plugin {
           return;
         }
 
-        // Static files from web-dist
+        // Static files from web-dist (disk first, then embedded for BRAT installs)
         const staticPath = pname === "/" ? "/index.html" : pname;
         const filePath = path.join(distDir, staticPath.replace(/^\//, ""));
         if (await serveStatic(filePath, res)) return;
+        if (serveEmbedded(pname, res)) return;
 
         // Fallback: serve index.html for client-side routing
         const indexPath = path.join(distDir, "index.html");
         if (await serveStatic(indexPath, res)) return;
+        if (serveEmbedded("/", res)) return;
 
         // 404
         res.writeHead(404);

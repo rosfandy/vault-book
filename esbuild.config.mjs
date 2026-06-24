@@ -39,6 +39,11 @@ const context = await esbuild.context({
 
 if (prod) {
   await context.rebuild();
+  // Embed web-dist files so BRAT installs work (BRAT only downloads main.js/manifest.json/styles.css)
+  const fs = await import("fs");
+  const appJs = fs.readFileSync("web-dist/app.js", "utf8");
+  const indexHtml = fs.readFileSync("web-dist/index.html", "utf8");
+  fs.appendFileSync("main.js", `\n//@ts-nocheck\nconst __EMBEDDED_WEB={"/index.html":${JSON.stringify(indexHtml)},"/app.js":${JSON.stringify(appJs)}};\n`);
   process.exit(0);
 } else {
   await context.watch();
