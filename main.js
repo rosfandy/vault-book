@@ -65,6 +65,8 @@ var GitbookPlugin = class extends import_obsidian.Plugin {
   async onload() {
     await this.loadSettings();
     this.pluginDir = __dirname;
+    new import_obsidian.Notice("[vault-book] loaded, dir=" + __dirname);
+    console.log("[vault-book] pluginDir =", this.pluginDir);
     this.addCommand({
       id: "start-server",
       name: "Start Gitbook Server",

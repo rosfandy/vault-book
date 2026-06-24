@@ -1,5 +1,5 @@
 {
-  "name": "obs-book",
+  "name": "vault-book",
   "version": "1.0.0",
   "description": "Export Obsidian vault to Gitbook-like static site",
   "main": "main.js",
