@@ -37,7 +37,7 @@ export default class GitbookPlugin extends Plugin {
     await this.loadSettings();
     const adapter = this.app.vault.adapter as FileSystemAdapter;
     const vaultPath = adapter.getBasePath();
-    this.pluginDir = path.join(vaultPath, this.app.vault.configDir, "plugins", "book-vault");
+    this.pluginDir = path.join(vaultPath, this.app.vault.configDir, "plugins", "obs-book");
 
     this.addCommand({
       id: "start-server",
@@ -59,7 +59,7 @@ export default class GitbookPlugin extends Plugin {
   }
 
   async loadSettings() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = { ...DEFAULT_SETTINGS, ...await this.loadData() };
   }
 
   async saveSettings() {
@@ -99,6 +99,7 @@ export default class GitbookPlugin extends Plugin {
       return true;
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.server = http.createServer(async (req, res) => {
       const url = new URL(req.url ?? "/", `http://localhost:${this.settings.port}`);
       const pname = url.pathname;

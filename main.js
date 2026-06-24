@@ -67,7 +67,7 @@ var GitbookPlugin = class extends import_obsidian.Plugin {
     await this.loadSettings();
     const adapter = this.app.vault.adapter;
     const vaultPath = adapter.getBasePath();
-    this.pluginDir = path.join(vaultPath, this.app.vault.configDir, "plugins", "book-vault");
+    this.pluginDir = path.join(vaultPath, this.app.vault.configDir, "plugins", "obs-book");
     this.addCommand({
       id: "start-server",
       name: "Start Gitbook Server",
@@ -84,7 +84,7 @@ var GitbookPlugin = class extends import_obsidian.Plugin {
     this.stopServer();
   }
   async loadSettings() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = { ...DEFAULT_SETTINGS, ...await this.loadData() };
   }
   async saveSettings() {
     await this.saveData(this.settings);
