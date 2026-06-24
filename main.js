@@ -177,16 +177,16 @@ var GitbookPlugin = class extends import_obsidian.Plugin {
           res.end(JSON.stringify({ slug, title: page.title, content }));
           return;
         }
+        if (serveEmbedded(pname, res))
+          return;
         const staticPath = pname === "/" ? "/index.html" : pname;
         const filePath = path.join(distDir, staticPath.replace(/^\//, ""));
         if (await serveStatic(filePath, res))
           return;
-        if (serveEmbedded(pname, res))
+        if (serveEmbedded("/", res))
           return;
         const indexPath = path.join(distDir, "index.html");
         if (await serveStatic(indexPath, res))
-          return;
-        if (serveEmbedded("/", res))
           return;
         res.writeHead(404);
         res.end("Not found");
